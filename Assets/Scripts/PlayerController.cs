@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    private float playerSpeed, jumpForceForward, jumpForceUp;
-    
+    private float playerSpeed, maxSpeed, jumpForceForward, jumpForceUp;
+
     private Rigidbody2D rb;
+    private bool grounded;
 
     private void Start()
     {
@@ -17,13 +18,40 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
-        float playerJump = Input.GetAxis("Jump");
+        //float playerJump = Input.GetAxis("Jump") * jumpForceUp;
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-        Vector3 jump = new Vector3(jumpForceForward, playerJump * jumpForceUp, 0.0f);
+        Vector3 jump = new Vector3(0.0f, jumpForceUp, 0.0f);
 
-        transform.position = transform.position + (movement * playerSpeed);
-        rb.AddForce(jump);
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
 
+        if (grounded)
+        {
+            rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
+
+            //transform.position = transform.position + (movement * playerSpeed);
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+            }
+        }
+              
+    }
+
+    void CheckDirection()
+    {
+
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        grounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        grounded = false;
     }
 }
