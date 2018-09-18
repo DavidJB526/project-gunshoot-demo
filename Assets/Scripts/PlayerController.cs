@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     private float playerSpeed, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed;
     [SerializeField]
     private Rigidbody2D bullet;
+    [SerializeField]
+    private Transform firePoint;
 
     private Rigidbody2D rb;
     private bool grounded;
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             Rigidbody2D bulletClone;
-            bulletClone = Instantiate(bullet, transform.position + transform.right, transform.rotation) as Rigidbody2D;
+            bulletClone = Instantiate(bullet, firePoint.position, transform.rotation) as Rigidbody2D;
             bulletClone.velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
 
             if (grounded)
@@ -49,9 +51,7 @@ public class PlayerController : MonoBehaviour {
             {
                 rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed * 2);
             }
-
-        }
-              
+        }              
     }
 
     private void OnCollisionStay2D(Collision2D collision)
