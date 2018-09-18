@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
         if (grounded)
         {
             rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -40,7 +40,16 @@ public class PlayerController : MonoBehaviour {
             Rigidbody2D bulletClone;
             bulletClone = Instantiate(bullet, transform.position + transform.right, transform.rotation) as Rigidbody2D;
             bulletClone.velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
-            rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed);
+
+            if (grounded)
+            {
+                rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed);
+            }
+            else
+            {
+                rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed * 2);
+            }
+
         }
               
     }
