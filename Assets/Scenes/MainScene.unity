@@ -237,9 +237,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 0.05
-  maxSpeed: 8
-  jumpForceForward: 2
-  jumpForceUp: 10
+  maxSpeed: 6
+  jumpForceForward: 10
+  jumpForceUp: 30
+  bulletSpeed: 20
+  recoilSpeed: 10
+  bullet: {fileID: 50645290633903474, guid: a7ab3912247fbfe4dacd3ca94b9b38c5, type: 2}
 --- !u!1 &441935971
 GameObject:
   m_ObjectHideFlags: 0

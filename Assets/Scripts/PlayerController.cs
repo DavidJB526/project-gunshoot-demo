@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    private float playerSpeed, maxSpeed, jumpForceForward, jumpForceUp;
+    private float playerSpeed, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed;
+    [SerializeField]
+    private Rigidbody2D bullet;
 
     private Rigidbody2D rb;
     private bool grounded;
@@ -20,19 +22,25 @@ public class PlayerController : MonoBehaviour {
         float moveHorizontal = Input.GetAxis("Horizontal");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-        Vector3 jump = new Vector3(0.0f, jumpForceUp, 0.0f);
-
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
 
         if (grounded)
         {
             rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
 
             if (Input.GetButtonDown("Jump"))
             {
-                rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
                 rb.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
             }
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Rigidbody2D bulletClone;
+            bulletClone = Instantiate(bullet, transform.position + transform.right, transform.rotation) as Rigidbody2D;
+            bulletClone.velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
+            rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed);
         }
               
     }
