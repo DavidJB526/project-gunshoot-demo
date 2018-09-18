@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
-        //float playerJump = Input.GetAxis("Jump") * jumpForceUp;
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
         Vector3 jump = new Vector3(0.0f, jumpForceUp, 0.0f);
@@ -29,8 +28,6 @@ public class PlayerController : MonoBehaviour {
         {
             rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
 
-            //transform.position = transform.position + (movement * playerSpeed);
-
             if (Input.GetButtonDown("Jump"))
             {
                 rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
@@ -38,11 +35,6 @@ public class PlayerController : MonoBehaviour {
             }
         }
               
-    }
-
-    void CheckDirection()
-    {
-
     }
 
     private void OnCollisionStay2D(Collision2D collision)
