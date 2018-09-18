@@ -21,21 +21,27 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-
-        if (grounded)
+        if (Input.GetButton("Horizontal"))
         {
-            rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
-            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
+            float moveHorizontal = Input.GetAxis("Horizontal");
 
-            if (Input.GetButtonDown("Jump"))
+            //Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
+
+            if (grounded)
             {
-                rb.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
-                rb.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+                rb.velocity = new Vector2(moveHorizontal * playerSpeed, 0.0f);
+                //rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
+                //rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);                
             }
         }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+        }
+
+
 
         if (Input.GetButtonDown("Fire1"))
         {

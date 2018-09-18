@@ -243,10 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd55f3fedb47b94ab94c9787e1c4365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 0.05
+  playerSpeed: 10
   maxSpeed: 10
-  jumpForceForward: 20
-  jumpForceUp: 120
+  jumpForceForward: 4
+  jumpForceUp: 15
   bulletSpeed: 20
   recoilSpeed: 5
   bullet: {fileID: 50789667184417300, guid: a7ab3912247fbfe4dacd3ca94b9b38c5, type: 2}
