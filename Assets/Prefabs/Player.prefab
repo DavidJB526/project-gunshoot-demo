@@ -150,7 +150,7 @@ MonoBehaviour:
   playerSpeed: 10
   maxSpeed: 10
   jumpForceForward: 5
-  jumpForceUp: 15
+  jumpForceUp: 20
   bulletSpeed: 20
   recoilSpeed: 5
   bullet: {fileID: 50789667184417300, guid: a7ab3912247fbfe4dacd3ca94b9b38c5, type: 2}

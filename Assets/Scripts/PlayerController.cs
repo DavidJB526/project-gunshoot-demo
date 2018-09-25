@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb;
     private bool grounded;
-    private bool isFacingRight;
+    private bool isFacingRight = true;
 
     private void Start()
     {
@@ -86,12 +86,12 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             Vector2 recoil = new Vector2();
-
             recoil = transform.TransformDirection(Vector2.left * recoilSpeed);
+
+            Rigidbody2D bulletClone;
 
             if (isFacingRight)
             {
-                Rigidbody2D bulletClone;
                 bulletClone = Instantiate(bullet, firePointRight.position, transform.rotation) as Rigidbody2D;
                 bulletClone.velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
 
@@ -106,7 +106,6 @@ public class PlayerController : MonoBehaviour {
             }
             else if (!isFacingRight)
             {
-                Rigidbody2D bulletClone;
                 bulletClone = Instantiate(bullet, firePointLeft.position, transform.rotation) as Rigidbody2D;
                 bulletClone.velocity = transform.TransformDirection(Vector2.left * bulletSpeed);
 
