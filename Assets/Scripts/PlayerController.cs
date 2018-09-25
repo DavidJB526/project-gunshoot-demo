@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb;
     private bool grounded;
+    private bool isFacingRight;
 
     private void Start()
     {
@@ -21,28 +22,68 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (Input.GetButton("Horizontal"))
+        Move();
+        //Jump();
+        //Shoot();                     
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        grounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        grounded = false;
+    }
+
+    private void Move()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
+
+        if (grounded)
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
-
-            //Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-
-            if (grounded)
-            {
-                rb.velocity = new Vector2(moveHorizontal * playerSpeed, 0.0f);
-                //rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
-                //rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);                
-            }
+            //rb.velocity = new Vector2(moveHorizontal * playerSpeed, 0.0f);
+            rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
         }
 
+        if (moveHorizontal >= 0)
+        {
+            isFacingRight = true;
+            Debug.Log(isFacingRight.ToString());
+        }
+        else if (moveHorizontal < 0)
+        {
+            isFacingRight = false;
+            Debug.Log(isFacingRight.ToString());
+        }        
+    }
+
+    private void Jump()
+    {
         if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
-            rb.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+            if (grounded)
+            {
+                rb.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
+
+                if (isFacingRight)
+                {
+                    rb.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+                }
+                else if (!isFacingRight)
+                {
+                    rb.AddForce(Vector2.left * jumpForceForward, ForceMode2D.Impulse);
+                }
+            }
         }
+    }
 
-
-
+    private void Shoot()
+    {
         if (Input.GetButtonDown("Fire1"))
         {
             Rigidbody2D bulletClone;
@@ -57,16 +98,6 @@ public class PlayerController : MonoBehaviour {
             {
                 rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed * 2);
             }
-        }              
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        grounded = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        grounded = false;
+        }
     }
 }
