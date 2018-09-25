@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D bullet;
     [SerializeField]
-    private Transform firePoint;
+    private Transform firePointRight, firePointLeft;
 
     private Rigidbody2D rb;
     private bool grounded;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     {
         Move();
         Jump();
-        //Shoot();                     
+        Shoot();                     
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -82,19 +82,42 @@ public class PlayerController : MonoBehaviour {
 
     private void Shoot()
     {
+        
         if (Input.GetButtonDown("Fire1"))
         {
-            Rigidbody2D bulletClone;
-            bulletClone = Instantiate(bullet, firePoint.position, transform.rotation) as Rigidbody2D;
-            bulletClone.velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
+            Vector2 recoil = new Vector2();
 
-            if (grounded)
+            recoil = transform.TransformDirection(Vector2.left * recoilSpeed);
+
+            if (isFacingRight)
             {
-                rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed);
+                Rigidbody2D bulletClone;
+                bulletClone = Instantiate(bullet, firePointRight.position, transform.rotation) as Rigidbody2D;
+                bulletClone.velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
+
+                if (grounded)
+                {
+                    rb.velocity = recoil;
+                }
+                else
+                {
+                    rb.velocity = recoil * 2;
+                }
             }
-            else
+            else if (!isFacingRight)
             {
-                rb.velocity = transform.TransformDirection(Vector2.left * recoilSpeed * 2);
+                Rigidbody2D bulletClone;
+                bulletClone = Instantiate(bullet, firePointLeft.position, transform.rotation) as Rigidbody2D;
+                bulletClone.velocity = transform.TransformDirection(Vector2.left * bulletSpeed);
+
+                if (grounded)
+                {
+                    rb.velocity = -recoil;
+                }
+                else
+                {
+                    rb.velocity = -recoil * 2;
+                }
             }
         }
     }
