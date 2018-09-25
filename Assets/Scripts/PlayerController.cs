@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate()
     {
         Move();
-        //Jump();
+        Jump();
         //Shoot();                     
     }
 
@@ -50,15 +50,13 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
         }
 
-        if (moveHorizontal >= 0)
+        if (moveHorizontal > 0)
         {
             isFacingRight = true;
-            Debug.Log(isFacingRight.ToString());
         }
         else if (moveHorizontal < 0)
         {
             isFacingRight = false;
-            Debug.Log(isFacingRight.ToString());
         }        
     }
 
