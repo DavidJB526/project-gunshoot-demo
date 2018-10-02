@@ -5,19 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    private float playerSpeed, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed;
+    private float playerAcceleration, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed;
     [SerializeField]
     private Rigidbody2D bullet;
     [SerializeField]
     private Transform firePoint;
 
-    private Rigidbody2D rb;
+    private Rigidbody2D rb2d;
     private bool grounded;
     private bool isFacingRight = true;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -45,9 +45,8 @@ public class PlayerController : MonoBehaviour {
 
         if (grounded)
         {
-            //rb.velocity = new Vector2(moveHorizontal * playerSpeed, 0.0f);
-            rb.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
-            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
+            rb2d.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
+            rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
         }
 
         if (moveHorizontal > 0)
@@ -66,15 +65,15 @@ public class PlayerController : MonoBehaviour {
         {
             if (grounded)
             {
-                rb.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
+                rb2d.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
 
                 if (isFacingRight)
                 {
-                    rb.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+                    rb2d.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
                 }
                 else if (!isFacingRight)
                 {
-                    rb.AddForce(Vector2.left * jumpForceForward, ForceMode2D.Impulse);
+                    rb2d.AddForce(Vector2.left * jumpForceForward, ForceMode2D.Impulse);
                 }
             }
         }
@@ -95,11 +94,11 @@ public class PlayerController : MonoBehaviour {
 
             if (grounded)
             {
-                rb.velocity = recoil;
+                rb2d.velocity = recoil;
             }
             else
             {
-                rb.velocity = recoil * 2;
+                rb2d.velocity = recoil * 2;
             }
         }
     }
