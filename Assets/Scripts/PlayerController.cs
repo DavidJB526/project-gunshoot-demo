@@ -104,6 +104,5 @@ public class PlayerController : MonoBehaviour {
     private void GroundCheck()
     {
         grounded = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
-        Debug.Log(grounded);
     }
 }
