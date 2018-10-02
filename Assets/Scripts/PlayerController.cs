@@ -90,14 +90,7 @@ public class PlayerController : MonoBehaviour {
             bulletClone = Instantiate(bullet, transform.position + firePoint.right, firePoint.transform.rotation) as Rigidbody2D;
             bulletClone.velocity = transform.TransformDirection(firePoint.right * bulletSpeed);
 
-            if (grounded)
-            {
-                rb2d.velocity = recoil;
-            }
-            else
-            {
-                rb2d.velocity = recoil * 2;
-            }
+            rb2d.AddForce(recoil, ForceMode2D.Impulse);
         }
     }
 

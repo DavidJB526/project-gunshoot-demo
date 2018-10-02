@@ -153,7 +153,7 @@ MonoBehaviour:
   jumpForceForward: 3
   jumpForceUp: 10
   bulletSpeed: 20
-  recoilSpeed: 4
+  recoilSpeed: 6
   bullet: {fileID: 50789667184417300, guid: a7ab3912247fbfe4dacd3ca94b9b38c5, type: 2}
   firePoint: {fileID: 4301051426636228}
   groundDetectTrigger: {fileID: 58437083505929670}
