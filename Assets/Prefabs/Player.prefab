@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 70400678958412034}
   - component: {fileID: 50877617044306698}
   - component: {fileID: 114877431316536284}
+  - component: {fileID: 58437083505929670}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1381101518518422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.5, z: 0}
+  m_LocalPosition: {x: 0, y: -3.56, z: 0}
   m_LocalScale: {x: 5, y: 10, z: 1}
   m_Children:
   - {fileID: 4301051426636228}
@@ -93,6 +94,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58437083505929670
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381101518518422}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.08}
+  serializedVersion: 2
+  m_Radius: 0.04
 --- !u!70 &70400678958412034
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -134,12 +150,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAcceleration: 2
   maxSpeed: 10
-  jumpForceForward: 5
-  jumpForceUp: 20
+  jumpForceForward: 3
+  jumpForceUp: 10
   bulletSpeed: 20
   recoilSpeed: 4
   bullet: {fileID: 50789667184417300, guid: a7ab3912247fbfe4dacd3ca94b9b38c5, type: 2}
   firePoint: {fileID: 4301051426636228}
+  groundDetectTrigger: {fileID: 58437083505929670}
+  groundContactFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 256
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!212 &212168877412758086
 SpriteRenderer:
   m_ObjectHideFlags: 1

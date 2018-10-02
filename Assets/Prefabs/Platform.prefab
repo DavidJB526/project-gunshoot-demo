@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4779987373988050}
   - component: {fileID: 212846226069465154}
   - component: {fileID: 61385316661368488}
-  - component: {fileID: 50121699337231752}
-  m_Layer: 0
+  - component: {fileID: 50477890881051020}
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,14 +35,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1097860821533690}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 2, z: 0}
-  m_LocalScale: {x: 3.65, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.9726027, y: -4.1099997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50121699337231752
+--- !u!50 &50477890881051020
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1

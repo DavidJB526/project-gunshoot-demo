@@ -10,8 +10,14 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D bullet;
     [SerializeField]
     private Transform firePoint;
+    [SerializeField]
+    private Collider2D groundDetectTrigger;
+    [SerializeField]
+    private ContactFilter2D groundContactFilter;
+
 
     private Rigidbody2D rb2d;
+    private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private bool grounded;
     private bool isFacingRight = true;
 
@@ -20,21 +26,16 @@ public class PlayerController : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        GroundCheck();
+        Shoot();
+    }
+
     private void FixedUpdate()
     {
         Move();
-        Jump();
-        Shoot();                     
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        grounded = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        grounded = false;
+        Jump();                           
     }
 
     private void Move()
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
 
-        if (grounded)
+        if (grounded == true)
         {
             rb2d.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
             rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
@@ -61,20 +62,17 @@ public class PlayerController : MonoBehaviour {
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && grounded)
         {
-            if (grounded)
-            {
-                rb2d.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
+            rb2d.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
 
-                if (isFacingRight)
-                {
-                    rb2d.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
-                }
-                else if (!isFacingRight)
-                {
-                    rb2d.AddForce(Vector2.left * jumpForceForward, ForceMode2D.Impulse);
-                }
+            if (isFacingRight)
+            {
+                rb2d.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+            }
+            else if (!isFacingRight)
+            {
+                rb2d.AddForce(Vector2.left * jumpForceForward, ForceMode2D.Impulse);
             }
         }
     }
@@ -101,5 +99,11 @@ public class PlayerController : MonoBehaviour {
                 rb2d.velocity = recoil * 2;
             }
         }
+    }
+
+    private void GroundCheck()
+    {
+        grounded = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
+        Debug.Log(grounded);
     }
 }
