@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D bullet;
     [SerializeField]
-    private Transform firePointRight, firePointLeft;
+    private Transform firePoint;
 
     private Rigidbody2D rb;
     private bool grounded;
@@ -86,37 +86,20 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             Vector2 recoil = new Vector2();
-            recoil = transform.TransformDirection(Vector2.left * recoilSpeed);
+            recoil = transform.TransformDirection(-firePoint.right * recoilSpeed);
 
             Rigidbody2D bulletClone;
 
-            if (isFacingRight)
-            {
-                bulletClone = Instantiate(bullet, firePointRight.position, transform.rotation) as Rigidbody2D;
-                bulletClone.velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
+            bulletClone = Instantiate(bullet, transform.position + firePoint.right, firePoint.transform.rotation) as Rigidbody2D;
+            bulletClone.velocity = transform.TransformDirection(firePoint.right * bulletSpeed);
 
-                if (grounded)
-                {
-                    rb.velocity = recoil;
-                }
-                else
-                {
-                    rb.velocity = recoil * 2;
-                }
+            if (grounded)
+            {
+                rb.velocity = recoil;
             }
-            else if (!isFacingRight)
+            else
             {
-                bulletClone = Instantiate(bullet, firePointLeft.position, transform.rotation) as Rigidbody2D;
-                bulletClone.velocity = transform.TransformDirection(Vector2.left * bulletSpeed);
-
-                if (grounded)
-                {
-                    rb.velocity = -recoil;
-                }
-                else
-                {
-                    rb.velocity = -recoil * 2;
-                }
+                rb.velocity = recoil * 2;
             }
         }
     }

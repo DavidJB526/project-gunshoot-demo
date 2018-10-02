@@ -671,6 +671,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1980984879504950, guid: 6b36ed865fdd7694bb0bd01881fc9113, type: 2}
+      propertyPath: m_Name
+      value: FirePoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b36ed865fdd7694bb0bd01881fc9113, type: 2}
   m_IsPrefabParent: 0
