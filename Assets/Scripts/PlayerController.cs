@@ -96,6 +96,9 @@ public class PlayerController : MonoBehaviour {
             bulletClone.velocity = transform.TransformDirection(firePoint.right * bulletSpeed);
 
             rb2d.AddForce(recoil, ForceMode2D.Impulse);
+
+
+            Flip();
         }
     }
 
