@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        isFacingRight = true;
     }
 
     private void Update()
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        Move();
+        //Move();
         Jump();                           
     }
 
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         else if (moveHorizontal < 0 && isFacingRight)
         {
             Flip();
-        }        
+        }
     }
 
     private void Jump()
@@ -69,15 +70,15 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
-            rb2d.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
+            rb2d.AddForce(Vector2.up * jumpForceUp);
 
             if (isFacingRight)
             {
-                rb2d.AddForce(Vector2.right * jumpForceForward, ForceMode2D.Impulse);
+                rb2d.AddForce(Vector2.right * jumpForceForward);
             }
             else if (!isFacingRight)
             {
-                rb2d.AddForce(Vector2.left * jumpForceForward, ForceMode2D.Impulse);
+                rb2d.AddForce(Vector2.left * jumpForceForward);
             }
         }
     }
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour {
         
         if (Input.GetButtonDown("Fire1"))
         {
+            anim.SetTrigger("playerShoot");
             Vector2 recoil = new Vector2();
             recoil = transform.TransformDirection(-firePoint.right * recoilSpeed);
 
@@ -97,8 +99,20 @@ public class PlayerController : MonoBehaviour {
 
             rb2d.AddForce(recoil, ForceMode2D.Impulse);
 
+            if ((firePoint.rotation.eulerAngles.z > 90 && isFacingRight) || (firePoint.rotation.eulerAngles.z < -90 && isFacingRight))
+            {
+                Flip();
+            }
+            else if ((firePoint.rotation.eulerAngles.z < 90 && !isFacingRight) || (firePoint.rotation.eulerAngles.z > -90 && !isFacingRight))
+            {
+                Flip();
+            }
 
-            Flip();
+
+            //if (!grounded)
+            //{
+            //    Flip();
+            //}
         }
     }
 
