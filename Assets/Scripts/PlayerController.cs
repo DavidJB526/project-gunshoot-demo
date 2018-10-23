@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
 
     private Rigidbody2D rb2d;
+    private Animator anim;
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private bool grounded;
     private bool isFacingRight = true;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         float moveHorizontal = Input.GetAxis("Horizontal");
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
+        anim.SetFloat("playerSpeed", Mathf.Abs(moveHorizontal));
 
         if (grounded == true)
         {
@@ -50,18 +53,20 @@ public class PlayerController : MonoBehaviour {
             rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
         }
 
-        if (moveHorizontal > 0)
+        if (moveHorizontal > 0 && !isFacingRight)
         {
-            isFacingRight = true;
+            Flip();
         }
-        else if (moveHorizontal < 0)
+        else if (moveHorizontal < 0 && isFacingRight)
         {
-            isFacingRight = false;
+            Flip();
         }        
     }
 
     private void Jump()
     {
+        anim.SetFloat("playerVSpeed", rb2d.velocity.y);
+
         if (Input.GetButtonDown("Jump") && grounded)
         {
             rb2d.AddForce(Vector2.up * jumpForceUp, ForceMode2D.Impulse);
@@ -97,5 +102,14 @@ public class PlayerController : MonoBehaviour {
     private void GroundCheck()
     {
         grounded = groundDetectTrigger.OverlapCollider(groundContactFilter, groundHitDetectionResults) > 0;
+        anim.SetBool("isGrounded", grounded);
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
