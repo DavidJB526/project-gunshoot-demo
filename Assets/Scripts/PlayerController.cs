@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        //Move();
+        Move();
         Jump();                           
     }
 
@@ -99,20 +99,14 @@ public class PlayerController : MonoBehaviour {
 
             rb2d.AddForce(recoil, ForceMode2D.Impulse);
 
-            if ((firePoint.rotation.eulerAngles.z > 90 && isFacingRight) || (firePoint.rotation.eulerAngles.z < -90 && isFacingRight))
+            if (isFacingRight && (firePoint.rotation.eulerAngles.z > 90 && firePoint.rotation.eulerAngles.z < 270))
             {
                 Flip();
             }
-            else if ((firePoint.rotation.eulerAngles.z < 90 && !isFacingRight) || (firePoint.rotation.eulerAngles.z > -90 && !isFacingRight))
+            else if (!isFacingRight && (firePoint.rotation.eulerAngles.z < 90 || firePoint.rotation.eulerAngles.z > 270))
             {
                 Flip();
             }
-
-
-            //if (!grounded)
-            //{
-            //    Flip();
-            //}
         }
     }
 
