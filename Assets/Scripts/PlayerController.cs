@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     private Animator anim;
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private bool grounded;
+    private bool isDead = false;
     private bool isFacingRight = true;
 
     private void Start()
@@ -27,18 +28,25 @@ public class PlayerController : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isFacingRight = true;
+        isDead = false;
     }
 
     private void Update()
     {
-        GroundCheck();
-        Shoot();
+        if (!isDead)
+        {
+            GroundCheck();
+            Shoot();
+        }        
     }
 
     private void FixedUpdate()
     {
-        Move();
-        Jump();                           
+        if (!isDead)
+        {
+            Move();
+            Jump();
+        }                                   
     }
 
     private void Move()
@@ -48,7 +56,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
         anim.SetFloat("playerSpeed", Mathf.Abs(moveHorizontal));
 
-        if (grounded == true)
+        if (grounded)
         {
             rb2d.AddForce(Vector2.right * movement, ForceMode2D.Impulse);
             rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
@@ -68,7 +76,7 @@ public class PlayerController : MonoBehaviour {
     {
         anim.SetFloat("playerVSpeed", rb2d.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && grounded && !isDead)
         {
             rb2d.AddForce(Vector2.up * jumpForceUp);
 
@@ -122,5 +130,14 @@ public class PlayerController : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Hazard"))
+        {
+            isDead = true;
+            anim.SetBool("isDead", true);
+        }
     }
 }
