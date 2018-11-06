@@ -107,9 +107,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2, y: -1.71}
+  m_Offset: {x: -0.24, y: -2.47}
   serializedVersion: 2
-  m_Radius: 1.32
+  m_Radius: 0.56
 --- !u!70 &70400678958412034
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -169,10 +169,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAcceleration: 2
   maxSpeed: 10
-  jumpForceForward: 300
-  jumpForceUp: 900
+  jumpForceForward: 200
+  jumpForceUp: 600
   bulletSpeed: 20
-  recoilSpeed: 6
+  recoilSpeed: 10
   bullet: {fileID: 50789667184417300, guid: a7ab3912247fbfe4dacd3ca94b9b38c5, type: 2}
   firePoint: {fileID: 4301051426636228}
   groundDetectTrigger: {fileID: 58437083505929670}
@@ -190,6 +190,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  collectableText: {fileID: 0}
 --- !u!212 &212168877412758086
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -224,7 +225,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 25bff753e849e7e4b957579ac9a89267, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hazard
+  - Checkpoint
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -39,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3909299435
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 3007751625
     locked: 0

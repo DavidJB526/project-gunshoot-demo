@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -14,14 +16,18 @@ public class PlayerController : MonoBehaviour {
     private Collider2D groundDetectTrigger;
     [SerializeField]
     private ContactFilter2D groundContactFilter;
+    [SerializeField]
+    private Text collectableText;
 
 
     private Rigidbody2D rb2d;
     private Animator anim;
+    private Checkpoint currentCheckpoint;
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private bool grounded;
     private bool isDead = false;
     private bool isFacingRight = true;
+    private float collectables = 0f;
 
     private void Start()
     {
@@ -29,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         isFacingRight = true;
         isDead = false;
+        UpdateCollectables();
     }
 
     private void Update()
@@ -37,7 +44,8 @@ public class PlayerController : MonoBehaviour {
         {
             GroundCheck();
             Shoot();
-        }        
+        }
+        anim.SetBool("isDead", isDead);
     }
 
     private void FixedUpdate()
@@ -96,6 +104,7 @@ public class PlayerController : MonoBehaviour {
         
         if (Input.GetButtonDown("Fire1"))
         {
+            rb2d.velocity = Vector3.zero;
             anim.SetTrigger("playerShoot");
             Vector2 recoil = new Vector2();
             recoil = transform.TransformDirection(-firePoint.right * recoilSpeed);
@@ -132,12 +141,54 @@ public class PlayerController : MonoBehaviour {
         transform.localScale = theScale;
     }
 
+    private void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
+    {
+        if (currentCheckpoint != null)
+        {
+            currentCheckpoint.SetIsActivated(false);
+        }
+
+        currentCheckpoint = newCurrentCheckpoint;
+        currentCheckpoint.SetIsActivated(true);
+    }
+
+    private void Respawn()
+    {
+        rb2d.velocity = Vector2.zero;
+        anim.ResetTrigger("playerShoot");
+        grounded = true;
+
+        if (currentCheckpoint == null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
+        }
+        isDead = false;
+    }
+
+    private void UpdateCollectables()
+    {
+        collectableText.text = "Collectables: " + collectables;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Hazard"))
+        if (other.CompareTag("Hazard"))
         {
             isDead = true;
-            anim.SetBool("isDead", true);
+        }
+        else if (other.CompareTag("Checkpoint"))
+        {
+            SetCurrentCheckpoint(other.GetComponent<Checkpoint>());
+        }
+        else if (other.CompareTag("Collectable"))
+        {
+            collectables++;
+            UpdateCollectables();
         }
     }
 }
