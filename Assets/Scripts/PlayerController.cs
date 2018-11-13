@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour {
     {        
         if (Input.GetButtonDown("Fire1") && overheat < 100)
         {
+            anim.SetBool("isShooting", true);
             overheat += overheatAdd;
             rb2d.velocity = Vector3.zero;
             anim.SetTrigger("playerShoot");
@@ -200,6 +201,11 @@ public class PlayerController : MonoBehaviour {
             overheat -= overheatSubtract;
         }        
         overheatSlider.value = overheat / 100;
+    }
+
+    private void ResetIsShooting()
+    {
+        anim.SetBool("isShooting", false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
