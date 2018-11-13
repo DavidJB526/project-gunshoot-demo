@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float playerAcceleration, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed;
     [SerializeField]
+    private PhysicsMaterial2D playerMoving, playerStopping;
+    [SerializeField]
+    private CapsuleCollider2D playerCollider;
+    [SerializeField]
     private Rigidbody2D bullet;
     [SerializeField]
     private Transform firePoint;
@@ -59,7 +63,16 @@ public class PlayerController : MonoBehaviour {
 
     private void Move()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+
+        if (Mathf.Abs(moveHorizontal) > 0)
+        {
+            playerCollider.sharedMaterial = playerMoving;
+        }
+        else
+        {
+            playerCollider.sharedMaterial = playerStopping;
+        }
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
         anim.SetFloat("playerSpeed", Mathf.Abs(moveHorizontal));

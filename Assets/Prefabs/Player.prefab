@@ -103,7 +103,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1381101518518422}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 23bb325309292c34f8a9ef4ad2280001, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -118,7 +118,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1381101518518422}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 23bb325309292c34f8a9ef4ad2280001, type: 2}
+  m_Material: {fileID: 6200000, guid: 105f81d8abd9afb4392653a7f3207deb, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -173,6 +173,9 @@ MonoBehaviour:
   jumpForceUp: 600
   bulletSpeed: 20
   recoilSpeed: 10
+  playerMoving: {fileID: 6200000, guid: 918841d42b3a65a4aa19e98efe28e192, type: 2}
+  playerStopping: {fileID: 6200000, guid: 105f81d8abd9afb4392653a7f3207deb, type: 2}
+  playerCollider: {fileID: 70400678958412034}
   bullet: {fileID: 50789667184417300, guid: a7ab3912247fbfe4dacd3ca94b9b38c5, type: 2}
   firePoint: {fileID: 4301051426636228}
   groundDetectTrigger: {fileID: 58437083505929670}
