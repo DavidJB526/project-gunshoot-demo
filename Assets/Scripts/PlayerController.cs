@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour {
         rb2d.velocity = Vector2.zero;
         anim.ResetTrigger("playerShoot");
         grounded = true;
+        overheat = 0;
 
         if (currentCheckpoint == null)
         {
@@ -194,7 +195,10 @@ public class PlayerController : MonoBehaviour {
 
     private void UpdateOverheat()
     {
-        overheat -= overheatSubtract;
+        if(overheat > 0)
+        {
+            overheat -= overheatSubtract;
+        }        
         overheatSlider.value = overheat / 100;
     }
 

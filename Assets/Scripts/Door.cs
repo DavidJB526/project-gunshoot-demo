@@ -8,7 +8,7 @@ public class Door : MonoBehaviour {
     [SerializeField]
     private string nextScene;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player") && Input.GetButtonDown("Activate"))
         {

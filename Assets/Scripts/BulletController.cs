@@ -8,7 +8,6 @@ public class BulletController : MonoBehaviour {
     {
         if (collision.tag != "Player" && collision.tag != "Background" && collision.tag != "Collectable" && collision.tag != "Checkpoint")
         {
-            Debug.Log("Hit " + collision.name);
             Destroy(gameObject);
         }
         
