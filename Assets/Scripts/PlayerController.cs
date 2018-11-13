@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    private float playerAcceleration, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed;
+    private float playerAcceleration, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed, overheatAdd, overheatSubtract;
     [SerializeField]
     private PhysicsMaterial2D playerMoving, playerStopping;
     [SerializeField]
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
     private ContactFilter2D groundContactFilter;
     [SerializeField]
     private Text collectableText;
+    [SerializeField]
+    private Slider overheatSlider;
 
 
     private Rigidbody2D rb2d;
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     private bool isDead = false;
     private bool isFacingRight = true;
     private float collectables = 0f;
+    private float overheat = 0f;
 
     private void Start()
     {
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour {
             Shoot();
         }
         anim.SetBool("isDead", isDead);
+        UpdateOverheat();
     }
 
     private void FixedUpdate()
@@ -113,10 +117,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Shoot()
-    {
-        
-        if (Input.GetButtonDown("Fire1"))
+    {        
+        if (Input.GetButtonDown("Fire1") && overheat < 100)
         {
+            overheat += overheatAdd;
             rb2d.velocity = Vector3.zero;
             anim.SetTrigger("playerShoot");
             Vector2 recoil = new Vector2();
@@ -186,6 +190,12 @@ public class PlayerController : MonoBehaviour {
     private void UpdateCollectables()
     {
         collectableText.text = "Collectables: " + collectables;
+    }
+
+    private void UpdateOverheat()
+    {
+        overheat -= overheatSubtract;
+        overheatSlider.value = overheat / 100;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

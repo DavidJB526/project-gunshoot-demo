@@ -173,6 +173,8 @@ MonoBehaviour:
   jumpForceUp: 600
   bulletSpeed: 20
   recoilSpeed: 10
+  overheatAdd: 25
+  overheatSubtract: 0.2
   playerMoving: {fileID: 6200000, guid: 918841d42b3a65a4aa19e98efe28e192, type: 2}
   playerStopping: {fileID: 6200000, guid: 105f81d8abd9afb4392653a7f3207deb, type: 2}
   playerCollider: {fileID: 70400678958412034}
@@ -194,6 +196,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   collectableText: {fileID: 0}
+  overheatSlider: {fileID: 0}
 --- !u!212 &212168877412758086
 SpriteRenderer:
   m_ObjectHideFlags: 1
