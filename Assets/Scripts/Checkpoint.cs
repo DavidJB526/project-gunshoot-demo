@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour {
+public class Checkpoint : MonoBehaviour 
+{
 
     [SerializeField]
     private Sprite inactiveSprite, activeSprite;
@@ -10,11 +11,11 @@ public class Checkpoint : MonoBehaviour {
     private bool isActivated;
     private SpriteRenderer spriteRenderer;
 
-	void Start ()
+    private void Start ()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         UpdateSprite();
-	}
+    }
 
     private void UpdateSprite()
     {
