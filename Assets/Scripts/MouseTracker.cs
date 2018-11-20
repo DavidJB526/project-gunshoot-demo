@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseTracker : MonoBehaviour {
-
+public class MouseTracker : MonoBehaviour
+{
     private Vector3 mousePosition;
 
     [SerializeField]
