@@ -34,7 +34,6 @@ public class Collectable : MonoBehaviour {
             boxCollider2D.enabled = false;
             spriteRenderer.enabled = false;
             Destroy(gameObject, audioSource.clip.length);
-
         }
     }
 }
