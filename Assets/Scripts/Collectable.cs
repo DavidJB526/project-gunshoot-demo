@@ -7,10 +7,10 @@ public class Collectable : MonoBehaviour {
     [SerializeField]
     private float rotationSpeed;
 
-	private void FixedUpdate ()
+    private void FixedUpdate ()
     {
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-	}
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
