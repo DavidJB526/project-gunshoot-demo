@@ -7,7 +7,27 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    private float playerAcceleration, maxSpeed, jumpForceForward, jumpForceUp, bulletSpeed, recoilSpeed, overheatAdd, overheatSubtract;
+    [Tooltip("Max Speed that the Player can Move")]
+    private float maxSpeed;
+    [SerializeField]
+    [Tooltip("How far Forward the Player Jumps on Jump")]
+    private float jumpForceForward;
+    [SerializeField]
+    [Tooltip("How far Up the Player Jumps on Jump")]
+    private float jumpForceUp;
+    [SerializeField]
+    [Tooltip("How Fast the Bullets Move")]
+    private float bulletSpeed;
+    [SerializeField]
+    [Tooltip("How much Force is applied to the Player when they Shoot")]
+    private float recoilSpeed;
+    [SerializeField]
+    [Tooltip("How much Overheat is Added on each Shot")]
+    private float overheatAdd;
+    [SerializeField]
+    [Tooltip("How much Overheat is Subtracted each Physics Frame")]
+    private float overheatSubtract;
+
     [SerializeField]
     private PhysicsMaterial2D playerMoving, playerStopping;
     [SerializeField]
@@ -48,7 +68,6 @@ public class PlayerController : MonoBehaviour {
             Shoot();
         }
         anim.SetBool("isDead", isDead);
-        UpdateOverheat();
     }
 
     private void FixedUpdate()
@@ -57,7 +76,8 @@ public class PlayerController : MonoBehaviour {
         {
             Move();
             Jump();
-        }                                   
+        }
+        UpdateOverheat();
     }
 
     private void Move()
