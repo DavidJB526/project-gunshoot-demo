@@ -7,6 +7,8 @@ public class Collectable : MonoBehaviour {
     [SerializeField]
     private float rotationSpeed;
 
+    public static float collectables = 0f;
+
     private void FixedUpdate ()
     {
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
@@ -17,6 +19,7 @@ public class Collectable : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
+            collectables++;
         }
     }
 }

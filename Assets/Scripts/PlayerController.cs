@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private ContactFilter2D groundContactFilter;
     [SerializeField]
-    private Text collectableText;
-    [SerializeField]
     private Slider overheatSlider;
 
     private Rigidbody2D rb2d;
@@ -32,7 +30,6 @@ public class PlayerController : MonoBehaviour {
     private bool grounded;
     private bool isDead = false;
     private bool isFacingRight = true;
-    private float collectables = 0f;
     private float overheat = 0f;
 
     private void Start()
@@ -41,7 +38,6 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         isFacingRight = true;
         isDead = false;
-        UpdateCollectables();
     }
 
     private void Update()
@@ -186,12 +182,7 @@ public class PlayerController : MonoBehaviour {
             transform.position = currentCheckpoint.transform.position;
         }
         isDead = false;
-    }
-
-    private void UpdateCollectables()
-    {
-        collectableText.text = "Collectables: " + collectables;
-    }
+    }    
 
     private void UpdateOverheat()
     {
@@ -216,11 +207,6 @@ public class PlayerController : MonoBehaviour {
         else if (other.CompareTag("Checkpoint"))
         {
             SetCurrentCheckpoint(other.GetComponent<Checkpoint>());
-        }
-        else if (other.CompareTag("Collectable"))
-        {
-            collectables++;
-            UpdateCollectables();
         }
     }
 }
