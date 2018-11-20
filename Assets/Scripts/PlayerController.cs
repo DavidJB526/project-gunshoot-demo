@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb2d;
     private Animator anim;
+    private AudioSource[] audioSources;
+    private AudioSource jumpSound;
+    private AudioSource deathSound;
     private Checkpoint currentCheckpoint;
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
     private bool grounded;
@@ -56,6 +59,11 @@ public class PlayerController : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audioSources = GetComponents<AudioSource>();
+
+        jumpSound = audioSources[0];
+        deathSound = audioSources[1];
+
         isFacingRight = true;
         isDead = false;
     }
@@ -119,6 +127,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && grounded && !isDead)
         {
             rb2d.AddForce(Vector2.up * jumpForceUp);
+            jumpSound.Play();
 
             if (isFacingRight)
             {
@@ -223,6 +232,7 @@ public class PlayerController : MonoBehaviour {
         if (other.CompareTag("Hazard"))
         {
             isDead = true;
+            deathSound.Play();
         }
         else if (other.CompareTag("Checkpoint"))
         {
