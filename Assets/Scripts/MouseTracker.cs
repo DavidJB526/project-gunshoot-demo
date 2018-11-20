@@ -20,5 +20,4 @@ public class MouseTracker : MonoBehaviour
         angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
-
 }
