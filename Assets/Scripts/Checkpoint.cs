@@ -9,10 +9,13 @@ public class Checkpoint : MonoBehaviour
     private Sprite inactiveSprite, activeSprite;
 
     private bool isActivated;
+
+    private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
 
     private void Start ()
     {
+        audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         UpdateSprite();
     }
@@ -22,8 +25,9 @@ public class Checkpoint : MonoBehaviour
         Sprite sprite = inactiveSprite;
 
         if (isActivated)
-        {
+        {            
             sprite = activeSprite;
+            audioSource.Play();
         }
 
         spriteRenderer.sprite = sprite;
