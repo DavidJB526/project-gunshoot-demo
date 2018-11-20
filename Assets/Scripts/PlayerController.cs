@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Slider overheatSlider;
 
-
     private Rigidbody2D rb2d;
     private Animator anim;
     private Checkpoint currentCheckpoint;
