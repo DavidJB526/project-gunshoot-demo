@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This will be attached to the FirePoint of the Player in order to track
+/// the position of the Mouse and rotate the FirePoint towards it
+/// </summary>
 public class MouseTracker : MonoBehaviour
 {
     private Vector3 mousePosition;
