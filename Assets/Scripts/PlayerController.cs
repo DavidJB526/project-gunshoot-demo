@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     [Tooltip("How much Upwards force is applied to the Player on Jump")]
     private float jumpForceUp;
     [SerializeField]
-    [Tooltip("How fast the Bullets move")]
+    [Tooltip("How fast the Bullets move (pos value)")]
     private float bulletSpeed;
     [SerializeField]
     [Tooltip("How much Backwards force is applied to the Player when they Shoot (pos value)")]
