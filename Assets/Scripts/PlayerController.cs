@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
-
+public class PlayerController : MonoBehaviour
+{
+    #region Serialized Floats
     [SerializeField]
     [Tooltip("Max Speed that the Player can Move")]
     private float maxSpeed;
@@ -27,7 +28,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     [Tooltip("How much Overheat is subtracted each Physics Frame (neg value)")]
     private float overheatSubtract;
+    #endregion
 
+    #region Serialized Objects
     [SerializeField]
     private PhysicsMaterial2D playerMoving, playerStopping;
     [SerializeField]
@@ -42,7 +45,9 @@ public class PlayerController : MonoBehaviour {
     private ContactFilter2D groundContactFilter;
     [SerializeField]
     private Slider overheatSlider;
+    #endregion
 
+    #region Private Variables
     private Rigidbody2D rb2d;
     private Animator anim;
     private AudioSource[] audioSources;
@@ -54,6 +59,7 @@ public class PlayerController : MonoBehaviour {
     private bool isDead = false;
     private bool isFacingRight = true;
     private float overheat = 0f;
+    #endregion
 
     private void Start()
     {
