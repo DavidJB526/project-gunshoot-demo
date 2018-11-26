@@ -8,12 +8,12 @@ using UnityEngine;
 /// </summary>
 public class MouseTracker : MonoBehaviour
 {
-    private Vector3 mousePosition;
-
     [SerializeField]
     private Vector3 firePoint;
     [SerializeField]
     private float angle;
+
+    private Vector3 mousePosition;
 
     private void FixedUpdate()
     {
