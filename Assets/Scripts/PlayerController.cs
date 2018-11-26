@@ -210,6 +210,7 @@ public class PlayerController : MonoBehaviour
         if (currentCheckpoint == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Collectable.collectables = 0;
         }
         else
         {
