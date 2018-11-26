@@ -14,14 +14,17 @@ public class MouseTracker : MonoBehaviour
     private float angle;
 
     private Vector3 mousePosition;
+    private Vector3 distanceToMouse;
 
     private void FixedUpdate()
     {
         mousePosition = Input.mousePosition;
         firePoint = Camera.main.WorldToScreenPoint(transform.position);
-        mousePosition.x = mousePosition.x - firePoint.x;
-        mousePosition.y = mousePosition.y - firePoint.y;
-        angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+        //check position of mouse and firepoint in world and adjust distance values to match position
+        distanceToMouse.x = mousePosition.x - firePoint.x;
+        distanceToMouse.y = mousePosition.y - firePoint.y;
+        //measure the Tangent and convert from Radians to Degrees to input into a rotation
+        angle = Mathf.Atan2(distanceToMouse.y, distanceToMouse.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }
