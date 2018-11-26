@@ -8,10 +8,9 @@ public class Checkpoint : MonoBehaviour
     [SerializeField]
     private Sprite inactiveSprite, activeSprite;
 
-    private bool isActivated;
-
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
+    private bool isActivated;
 
     private void Start ()
     {
