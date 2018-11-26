@@ -10,6 +10,7 @@ public class CollectableManager : MonoBehaviour
 
     private void Start()
     {
+        Collectable.collectables = 0;
         UpdateCollectableText();
     }
 
