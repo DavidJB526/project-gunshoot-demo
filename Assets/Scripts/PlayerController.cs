@@ -19,13 +19,13 @@ public class PlayerController : MonoBehaviour {
     [Tooltip("How fast the Bullets move")]
     private float bulletSpeed;
     [SerializeField]
-    [Tooltip("How much Backwards force is applied to the Player when they Shoot")]
+    [Tooltip("How much Backwards force is applied to the Player when they Shoot (pos value)")]
     private float recoilSpeed;
     [SerializeField]
-    [Tooltip("How much Overheat is added on each Shot")]
+    [Tooltip("How much Overheat is added on each Shot (pos value)")]
     private float overheatAdd;
     [SerializeField]
-    [Tooltip("How much Overheat is subtracted each Physics Frame")]
+    [Tooltip("How much Overheat is subtracted each Physics Frame (neg value)")]
     private float overheatSubtract;
 
     [SerializeField]
