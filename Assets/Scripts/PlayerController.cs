@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private ContactFilter2D groundContactFilter;
     [SerializeField]
+    private GameObject collectableUI;
+    [SerializeField]
     private Slider overheatSlider;
     [SerializeField]
     private AudioClip jumpSound;
@@ -210,7 +212,7 @@ public class PlayerController : MonoBehaviour
         if (currentCheckpoint == null)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Collectable.collectables = 0;
+            Collectable.collectables = collectableUI.GetComponent<CollectableManager>().startingCollectables;
         }
         else
         {

@@ -8,8 +8,11 @@ public class CollectableManager : MonoBehaviour
     [SerializeField]
     private Text collectableText;
 
+    public float startingCollectables;
+
     private void Start()
     {
+        startingCollectables = Collectable.collectables;
         UpdateCollectableText();
     }
 
