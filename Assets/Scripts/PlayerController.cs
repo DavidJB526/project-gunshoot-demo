@@ -10,22 +10,22 @@ public class PlayerController : MonoBehaviour {
     [Tooltip("Max Speed that the Player can Move")]
     private float maxSpeed;
     [SerializeField]
-    [Tooltip("How far Forward the Player Jumps on Jump")]
+    [Tooltip("How much Forward force is applied to the Player on Jump")]
     private float jumpForceForward;
     [SerializeField]
-    [Tooltip("How far Up the Player Jumps on Jump")]
+    [Tooltip("How much Upwards force is applied to the Player on Jump")]
     private float jumpForceUp;
     [SerializeField]
-    [Tooltip("How Fast the Bullets Move")]
+    [Tooltip("How fast the Bullets move")]
     private float bulletSpeed;
     [SerializeField]
-    [Tooltip("How much Force is applied to the Player when they Shoot")]
+    [Tooltip("How much Backwards force is applied to the Player when they Shoot")]
     private float recoilSpeed;
     [SerializeField]
-    [Tooltip("How much Overheat is Added on each Shot")]
+    [Tooltip("How much Overheat is added on each Shot")]
     private float overheatAdd;
     [SerializeField]
-    [Tooltip("How much Overheat is Subtracted each Physics Frame")]
+    [Tooltip("How much Overheat is subtracted each Physics Frame")]
     private float overheatSubtract;
 
     [SerializeField]
