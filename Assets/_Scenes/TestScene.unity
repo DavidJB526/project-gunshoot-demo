@@ -113,12 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &4944060 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114751699701635002, guid: 294d9691931fbdf4b889687a842b560a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1889098811}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &26673082
 GameObject:
   m_ObjectHideFlags: 0
@@ -41120,11 +41114,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48772b2f7fc33934fbba884ef9c1f63a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &181889752 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1381101518518422, guid: 6b36ed865fdd7694bb0bd01881fc9113,
-    type: 2}
-  m_PrefabInternal: {fileID: 1382563864}
 --- !u!4 &181889759 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4958334810456808, guid: 6b36ed865fdd7694bb0bd01881fc9113,
@@ -52865,7 +52854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56798e777ebdea54aa85667c3c583faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 181889752}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -69090,11 +69078,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114877431316536284, guid: 6b36ed865fdd7694bb0bd01881fc9113,
-        type: 2}
-      propertyPath: collectableText
-      value: 
-      objectReference: {fileID: 4944060}
     - target: {fileID: 114877431316536284, guid: 6b36ed865fdd7694bb0bd01881fc9113,
         type: 2}
       propertyPath: overheatSlider
