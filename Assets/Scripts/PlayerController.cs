@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private float overheatSubtract;
     #endregion
 
-    #region Serialized Objects
+    #region Serialized Fields
     [SerializeField]
     private PhysicsMaterial2D playerMoving, playerStopping;
     [SerializeField]
@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Slider overheatSlider;
     [SerializeField]
+    private Text overheatText;
+    [SerializeField]
+    private Text overheatMouseText;
+    [SerializeField]
     private AudioClip jumpSound;
     [SerializeField]
     private AudioClip deathSound;
@@ -59,9 +63,13 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     private Checkpoint currentCheckpoint;
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
+    private Color initialOverheatColor;
+    private Color finalOverheatColor;
+    private Color lerpedColor;
     private bool grounded;
     private bool isDead = false;
     private bool isFacingRight = true;
+    private bool canMove = false;
     private float overheat = 0f;
     #endregion
 
@@ -73,21 +81,25 @@ public class PlayerController : MonoBehaviour
 
         isFacingRight = true;
         isDead = false;
+        canMove = true;
+        initialOverheatColor = overheatMouseText.color;
+        finalOverheatColor = overheatText.color;
     }
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && canMove)
         {
             GroundCheck();
             Shoot();
         }
         anim.SetBool("isDead", isDead);
+        anim.SetBool("canMove", canMove);
     }
 
     private void FixedUpdate()
     {
-        if (!isDead)
+        if (!isDead && canMove)
         {
             Move();
             Jump();
@@ -223,11 +235,28 @@ public class PlayerController : MonoBehaviour
     }    
 
     private void UpdateOverheat()
-    {
+    {        
         if(overheat > 0)
         {
             overheat -= overheatSubtract;
-        }        
+        }
+
+        if(overheat >= 100)
+        {
+            lerpedColor = Color.Lerp(finalOverheatColor, initialOverheatColor, Mathf.PingPong(Time.time, .4f));
+            Cursor.visible = false;
+            overheatMouseText.enabled = true;
+            overheatMouseText.transform.position = Input.mousePosition;
+            overheatMouseText.color = lerpedColor;
+            overheatText.color = lerpedColor;            
+        }
+        else
+        {
+            overheatMouseText.enabled = false;
+            Cursor.visible = true;
+            overheatText.color = initialOverheatColor;
+        }
+
         overheatSlider.value = overheat / 100;
     }
 
@@ -236,11 +265,17 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isShooting", false);
     }
 
+    private void ResetCanMove()
+    {
+        canMove = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Hazard"))
         {
             isDead = true;
+            canMove = false;
             audioSource.clip = deathSound;
             audioSource.Play();
         }

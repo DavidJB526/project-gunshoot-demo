@@ -292,6 +292,8 @@ MonoBehaviour:
     maxNormalAngle: 0
   collectableUI: {fileID: 0}
   overheatSlider: {fileID: 0}
+  overheatText: {fileID: 0}
+  overheatMouseText: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: ca834fa13a8da104db1e7de52e11b805, type: 3}
   deathSound: {fileID: 8300000, guid: 21677b45156656645bea681f51bdef0e, type: 3}
 --- !u!212 &212168877412758086

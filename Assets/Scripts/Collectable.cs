@@ -22,7 +22,8 @@ public class Collectable : MonoBehaviour {
 
     private void FixedUpdate ()
     {
-        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        //transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        transform.localScale = Vector3.Lerp(Vector3.one, new Vector3(1.2f,1.2f), Mathf.PingPong(Time.time, 1));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
